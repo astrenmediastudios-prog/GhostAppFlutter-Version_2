@@ -1,3 +1,5 @@
+
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -146,6 +148,7 @@ class GhostWelcomeScreen extends StatelessWidget {
   }
 }
 
+
 class GhostNote {
   GhostNote({
     required this.id,
@@ -160,7 +163,28 @@ class GhostNote {
   final String content;
   final DateTime updatedAt;
   final bool isPinned;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'content': content,
+      'updatedAt': updatedAt.toIso8601String(),
+      'isPinned': isPinned,
+    };
+  }
+
+  factory GhostNote.fromJson(Map<String, dynamic> json) {
+    return GhostNote(
+      id: json['id'] as int,
+      title: json['title'] as String,
+      content: json['content'] as String,
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      isPinned: (json['isPinned'] as bool?) ?? false,
+    );
+  }
 }
+
 
 class GhostNotesScreen extends StatefulWidget {
   const GhostNotesScreen({super.key});
