@@ -1,12 +1,20 @@
 
-
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const GhostApp());
 }
+
 
 const ghostPurple = Color(0xFFAA99FF);
 const ghostBackground = Color(0xFF0D0D12);
